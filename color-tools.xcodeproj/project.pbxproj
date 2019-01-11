@@ -25,6 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D07636E21E94AC200A48CF0 /* colors.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = colors.plist; sourceTree = "<group>"; };
 		9DFEE7F221E65147009E67CF /* color-tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "color-tools"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DFEE7F521E65147009E67CF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9DFEE7FC21E65833009E67CF /* colors.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = colors.txt; sourceTree = "<group>"; };
@@ -74,8 +75,9 @@
 		9DFEE7FF21E6585D009E67CF /* samples */ = {
 			isa = PBXGroup;
 			children = (
-				9DFEE7FD21E65847009E67CF /* colors.swift */,
 				9DFEE7FC21E65833009E67CF /* colors.txt */,
+				9D07636E21E94AC200A48CF0 /* colors.plist */,
+				9DFEE7FD21E65847009E67CF /* colors.swift */,
 			);
 			path = samples;
 			sourceTree = "<group>";

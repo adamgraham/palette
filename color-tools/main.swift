@@ -26,10 +26,12 @@ do {
     switch filePath {
     case _ where filePath.contains(".txt"):
         colors = try parseColors(txt: filePath)
+    case _ where filePath.contains(".plist"):
+        colors = try parseColors(plist: filePath)
     case _ where filePath.contains(".swift"):
         colors = try parseColors(swift: filePath)
     default:
-        print("[Error]: Invalid file path - must have a .txt or .swift extension")
+        print("[Error]: Invalid file path - must include .txt, .plist, or .swift extension")
         exit(1)
     }
 } catch let error {
