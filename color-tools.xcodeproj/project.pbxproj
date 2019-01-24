@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DF27D6A21F8DE6E009E10ED /* composing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF27D6921F8DE6E009E10ED /* composing.swift */; };
 		9DFEE7F621E65147009E67CF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFEE7F521E65147009E67CF /* main.swift */; };
 		9DFEE80121E65C27009E67CF /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFEE80021E65C27009E67CF /* color.swift */; };
 		9DFEE80321E66515009E67CF /* parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFEE80221E66515009E67CF /* parsing.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		9D07636E21E94AC200A48CF0 /* colors.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = colors.plist; sourceTree = "<group>"; };
+		9DF27D6921F8DE6E009E10ED /* composing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = composing.swift; sourceTree = "<group>"; };
 		9DFEE7F221E65147009E67CF /* color-tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "color-tools"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DFEE7F521E65147009E67CF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9DFEE7FC21E65833009E67CF /* colors.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = colors.txt; sourceTree = "<group>"; };
@@ -65,9 +67,10 @@
 		9DFEE7F421E65147009E67CF /* color-tools */ = {
 			isa = PBXGroup;
 			children = (
-				9DFEE7F521E65147009E67CF /* main.swift */,
 				9DFEE80021E65C27009E67CF /* color.swift */,
+				9DF27D6921F8DE6E009E10ED /* composing.swift */,
 				9DFEE80221E66515009E67CF /* parsing.swift */,
+				9DFEE7F521E65147009E67CF /* main.swift */,
 			);
 			path = "color-tools";
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DFEE80321E66515009E67CF /* parsing.swift in Sources */,
+				9DF27D6A21F8DE6E009E10ED /* composing.swift in Sources */,
 				9DFEE7F621E65147009E67CF /* main.swift in Sources */,
 				9DFEE80121E65C27009E67CF /* color.swift in Sources */,
 			);

@@ -10,35 +10,35 @@ import Foundation
 
 enum ParsingError: Error, CustomStringConvertible {
 
-    case fileNotFound(path: String)
-    case readingContents(path: String, error: Error)
+    case invalidExtension
+    case readingContents(url: URL, error: Error)
 
     var description: String {
         switch self {
-        case .fileNotFound(let path):
-            return "No file exists at path \"\(path)\""
-        case .readingContents(let path, let error):
-            return "Could not read contents of \"\(path)\" - \(error)"
+        case .invalidExtension:
+            return "File path must include .txt, .plist, or .swift extension"
+        case .readingContents(let url, let error):
+            return "Could not read contents of \"\(url)\" - \(error)"
         }
     }
 
 }
 
-private func fileContents(atPath path: String) throws -> String {
-    guard FileManager.default.fileExists(atPath: path) else {
-        throw ParsingError.fileNotFound(path: path)
-    }
-
-    let url = URL(fileURLWithPath: path)
-    do {
-        return try String(contentsOf: url, encoding: .utf8)
-    } catch let error {
-        throw ParsingError.readingContents(path: path, error: error)
+func parseColors(at url: URL) throws -> [Color] {
+    switch url.pathExtension {
+    case "txt":
+        return try parse(txt: url)
+    case "plist":
+        return try parse(plist: url)
+    case "swift":
+        return try parse(swift: url)
+    default:
+        throw ParsingError.invalidExtension
     }
 }
 
-func parseColors(txt path: String) throws -> [Color] {
-    let contents = try fileContents(atPath: path)
+private func parse(txt url: URL) throws -> [Color] {
+    let contents = try fileContents(atPath: url)
     let lines = contents.components(separatedBy: .newlines)
 
     var colors: [Color] = []
@@ -47,16 +47,14 @@ func parseColors(txt path: String) throws -> [Color] {
         var components = line.components(separatedBy: " ")
         if components.count > 0, let color = Color(hex: components.removeFirst(), name: components.joined(separator: " ")) {
             colors.append(color)
-        } else {
-            print("[Warning]: Could not parse \"\(line)\", skipped")
         }
     }
 
     return colors
 }
 
-func parseColors(plist path: String) throws -> [Color] {
-    let contents = try fileContents(atPath: path)
+private func parse(plist url: URL) throws -> [Color] {
+    let contents = try fileContents(atPath: url)
     let regex = try NSRegularExpression(pattern: "<key>(\\w*)<\\/key>\\s*<string>((?:#|0x)[0-9a-fA-F]*)<\\/string>")
     let matches = regex.matches(in: contents, options: [], range: NSRange(location: 0, length: contents.count))
     var colors: [Color] = []
@@ -71,8 +69,8 @@ func parseColors(plist path: String) throws -> [Color] {
     return colors
 }
 
-func parseColors(swift path: String) throws -> [Color] {
-    let contents = try fileContents(atPath: path)
+private func parse(swift url: URL) throws -> [Color] {
+    let contents = try fileContents(atPath: url)
     let regex = try NSRegularExpression(pattern: "(?:var|let)\\s*(\\w+)\\s*(?::\\s*UIColor)?\\s*(?:=|\\{)\\s*UIColor\\((?:\\w+:)\\s*\"?((?:#|0x)[0-9a-fA-F]*)\"?")
     let matches = regex.matches(in: contents, options: [], range: NSRange(location: 0, length: contents.count))
     var colors: [Color] = []
@@ -85,4 +83,12 @@ func parseColors(swift path: String) throws -> [Color] {
     }
 
     return colors
+}
+
+private func fileContents(atPath url: URL) throws -> String {
+    do {
+        return try String(contentsOf: url, encoding: .utf8)
+    } catch let error {
+        throw ParsingError.readingContents(url: url, error: error)
+    }
 }

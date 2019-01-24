@@ -8,13 +8,19 @@
 
 extension UIColor {
 
-    static let white = UIColor(hex: "#ffffff")
-    static let red = UIColor(hex: "#ff0000")
-    static let green = UIColor(hex: "#00ff00")
-    static let blue = UIColor(hex: "#0000ff")
-    static let cyan = UIColor(hex: "#00ffff")
-    static let magenta = UIColor(hex: "#ff00ff")
-    static let yellow = UIColor(hex: "#ffff00")
-    static let black = UIColor(hex: "#000000")
+    public struct Sample {
+
+        private init() {}
+
+        public static let white = UIColor(hex: "#ffffff")
+        public static let red = UIColor(hex: "#ff0000")
+        public static let green = UIColor(hex: "#00ff00")
+        public static let blue = UIColor(hex: "#0000ff")
+        public static let cyan = UIColor(hex: "#00ffff")
+        public static let magenta = UIColor(hex: "#ff00ff")
+        public static let yellow = UIColor(hex: "#ffff00")
+        public static let black = UIColor(hex: "#000000")
+
+    }
 
 }

@@ -9,31 +9,24 @@
 import AppKit
 import Foundation
 
+// MARK: Validation
+
 let args = CommandLine.arguments
 
 guard args.count > 1 else {
     print("[Error]: No arguments provided")
-    print("[Usage]: ./color-tools {input_file_path} {output_file_name}")
+    print("[Usage]: ./color-tools {input_path} {output_path}")
     exit(1)
 }
 
-let filePath = args[1]
+// MARK: Parse Input
+
 let colors: [Color]
 
 do {
-    print("[Working]: Parsing colors at path \"\(filePath)\"")
-
-    switch filePath {
-    case _ where filePath.contains(".txt"):
-        colors = try parseColors(txt: filePath)
-    case _ where filePath.contains(".plist"):
-        colors = try parseColors(plist: filePath)
-    case _ where filePath.contains(".swift"):
-        colors = try parseColors(swift: filePath)
-    default:
-        print("[Error]: Invalid file path - must include .txt, .plist, or .swift extension")
-        exit(1)
-    }
+    let inputURL = URL(fileURLWithPath: args[1])
+    print("[Working]: Parsing colors at \(inputURL)")
+    colors = try parseColors(at: inputURL)
 } catch let error {
     print("[Error]: \(error)")
     exit(1)
@@ -44,20 +37,16 @@ guard colors.count > 0 else {
     exit(1)
 }
 
-print("[Working]: Generating color list")
-
-let outputName = args.count > 2 ? args[2] : "Unnamed"
-let colorList = NSColorList(name: outputName)
-
-for color in colors {
-    print("[Working]: Adding color \(color.name, color.nsColor)")
-    colorList.setColor(color.nsColor, forKey: color.name)
-}
+// MARK: Compose Output
 
 do {
-    print("[Working]: Writing colors to .clr file")
-    try colorList.write(to: nil)
-    print("[Success]: Color palette created at \"~/Library/Colors/\(outputName).clr\"")
+    let outputURL = args.count > 2 ? URL(fileURLWithPath: args[2]) : nil
+    let outputName = outputURL?.deletingPathExtension().lastPathComponent ?? "Unnamed"
+    print("[Working]: Generating color palette")
+    let colorPalette = try composePalette(from: colors, at: outputURL)
+    print("[Working]: Writing colors to file")
+    try colorPalette.write(to: outputURL)
+    print("[Success]: Color palette '\(outputName)\' created at \(outputURL ?? URL(fileURLWithPath: "~/Library/Colors/\(outputName).clr"))")
     exit(0)
 } catch let error {
     print("[Error]: \(error)")
