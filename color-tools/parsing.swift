@@ -71,14 +71,40 @@ private func parse(plist url: URL) throws -> [Color] {
 
 private func parse(swift url: URL) throws -> [Color] {
     let contents = try fileContents(atPath: url)
-    let regex = try NSRegularExpression(pattern: "(?:var|let)\\s*(\\w+)\\s*(?::\\s*UIColor)?\\s*(?:=|\\{)\\s*UIColor\\((?:\\w+:)\\s*\"?((?:#|0x)[0-9a-fA-F]*)\"?")
-    let matches = regex.matches(in: contents, options: [], range: NSRange(location: 0, length: contents.count))
     var colors: [Color] = []
+
+    // match by hex values
+    var regex = try NSRegularExpression(pattern: "(?:var|let)\\s*(\\w+)\\s*(?::\\s*UIColor)?\\s*(?:=|\\{)\\s*UIColor\\((?:\\w+:)\\s*\"?((?:#|0x)[0-9a-fA-F]*)\"?")
+    var matches = regex.matches(in: contents, options: [], range: NSRange(location: 0, length: contents.count))
 
     for match in matches {
         guard let hexCapture = Range(match.range(at: 2), in: contents) else { continue }
-        let nameCapture = Range(match.range(at: 1), in: contents) ?? hexCapture
+              let nameCapture = Range(match.range(at: 1), in: contents) ?? hexCapture
         guard let color = Color(hex: String(contents[hexCapture]), name: String(contents[nameCapture])) else { continue }
+        colors.append(color)
+    }
+
+    // match by rgb values
+    regex = try NSRegularExpression(pattern: "(?:var|let)\\s*(\\w+)\\s*(?::\\s*UIColor)?\\s*(?:=|\\{)\\s*(?:#colorLiteral|UIColor|NSColor)\\(\\w*[Rr]ed:\\s*(\\d*.\\d*),\\s*green:\\s*(\\d*.\\d*),\\s*blue:\\s*(\\d*.\\d*),\\s*alpha:\\s*(\\d*.\\d*)\\)")
+    matches = regex.matches(in: contents, options: [], range: NSRange(location: 0, length: contents.count))
+    let numberFormatter = NumberFormatter()
+
+    for match in matches {
+        guard let nameCapture = Range(match.range(at: 1), in: contents),
+              let redCapture = Range(match.range(at: 2), in: contents),
+              let greenCapture = Range(match.range(at: 3), in: contents),
+              let blueCapture = Range(match.range(at: 4), in: contents) else { continue }
+
+        guard let red = numberFormatter.number(from: String(contents[redCapture]))?.doubleValue,
+              let green = numberFormatter.number(from: String(contents[greenCapture]))?.doubleValue,
+              let blue = numberFormatter.number(from: String(contents[blueCapture]))?.doubleValue else { continue }
+
+        var alpha = 1.0
+        if let alphaCapture = Range(match.range(at: 5), in: contents) {
+            alpha = numberFormatter.number(from: String(contents[alphaCapture]))?.doubleValue ?? 1.0
+        }
+
+        let color = Color(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha), name: String(contents[nameCapture]))
         colors.append(color)
     }
 

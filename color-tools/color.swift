@@ -10,18 +10,30 @@ import AppKit
 
 struct Color {
 
+    // MARK: Properties
+
     let nsColor: NSColor
-    let hex: String
     let name: String
 
-    var literal: String {
-        return "#colorLiteral(red: \(self.nsColor.redComponent), green: \(self.nsColor.greenComponent), blue: \(self.nsColor.blueComponent), alpha: 1.0)"
+    var hex: String {
+        return self.nsColor.hexString
     }
 
-    init(nsColor: NSColor, name: String) {
+    var literal: String {
+        return "#colorLiteral(red: \(self.nsColor.redComponent), green: \(self.nsColor.greenComponent), blue: \(self.nsColor.blueComponent), alpha: \(self.nsColor.alphaComponent))"
+    }
+
+    // MARK: Initializers
+
+    init(nsColor: NSColor, name: String? = nil) {
         self.nsColor = nsColor
-        self.hex = nsColor.hexString
-        self.name = name
+        self.name = name ?? nsColor.hexString
+    }
+
+    init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat? = nil, name: String? = nil) {
+        let nsColor = NSColor(red: red, green: green, blue: blue, alpha: alpha ?? 1.0)
+        self.nsColor = nsColor
+        self.name = name ?? nsColor.hexString
     }
 
     init?(hex: String, name: String? = nil) {
@@ -30,11 +42,12 @@ struct Color {
         }
 
         self.nsColor = nsColor
-        self.hex = hex
         self.name = name ?? hex
     }
 
 }
+
+// MARK: - Helpers
 
 private extension NSColor {
 
@@ -43,21 +56,21 @@ private extension NSColor {
             return nil
         }
 
-        let red = CGFloat((value >> 16) & 0xff) / 255
-        let green = CGFloat((value >> 8) & 0xff) / 255
-        let blue = CGFloat((value >> 0) & 0xff) / 255
+        let red = CGFloat((value >> 16) & 0xff) / 0xff
+        let green = CGFloat((value >> 8) & 0xff) / 0xff
+        let blue = CGFloat((value >> 0) & 0xff) / 0xff
 
         self.init(srgbRed: red, green: green, blue: blue, alpha: 1.0)
     }
 
     var hex: Int {
-        return (Int(self.redComponent * 255) << 16) |
-               (Int(self.greenComponent * 255) << 8) |
-               (Int(self.blueComponent * 255) << 0)
+        return (Int(round(self.redComponent * 0xff)) << 16) |
+               (Int(round(self.greenComponent * 0xff)) << 8) |
+               (Int(round(self.blueComponent * 0xff)) << 0)
     }
 
     var hexString: String {
-        return "#\(String(self.hex, radix: 16))"
+        return "#\(String(format: "%06x", self.hex))"
     }
 
 }
