@@ -60,7 +60,7 @@ private func parse(txt url: URL) throws -> [Color] {
 
 private func parse(plist url: URL) throws -> [Color] {
     let contents = try fileContents(atPath: url)
-    let regex = try NSRegularExpression(pattern: "<key>(\\w*)<\\/key>\\s*<string>((?:#|0x)[0-9a-fA-F]*)<\\/string>")
+    let regex = try NSRegularExpression(pattern: "(?:<key>)?(\\w*)(?:<\\/key>)?\\s*<string>((?:#|0x)[0-9a-fA-F]*)<\\/string>")
     let matches = regex.matches(in: contents, options: [], range: NSRange(location: 0, length: contents.count))
     var colors: [Color] = []
 
