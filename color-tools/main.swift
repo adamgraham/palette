@@ -40,7 +40,8 @@ guard colors.count > 0 else {
 // MARK: Compose Output
 
 do {
-    let outputURL = args.count > 2 ? URL(fileURLWithPath: args[2]) : nil
+    var outputURL = args.count > 2 ? URL(fileURLWithPath: args[2]) : nil
+    if outputURL?.pathExtension.isEmpty ?? false { outputURL?.appendPathExtension("clr") }
     let outputName = outputURL?.deletingPathExtension().lastPathComponent ?? "Unnamed"
     print("[Working]: Generating color palette")
     let colorPalette = try composePalette(from: colors, at: outputURL)
