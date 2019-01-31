@@ -101,7 +101,7 @@ private func compose(swift colors: [Color], name: String) throws -> WritableFile
     let contents = """
         extension UIColor {
 
-            public struct {NAME} {
+            struct {NAME} {
 
                 {COLORS}
                 private init() {}
@@ -113,7 +113,7 @@ private func compose(swift colors: [Color], name: String) throws -> WritableFile
         """
 
     let colorContents = colors.reduce("") {
-        $0 + "/// `\($1.hex)`\n\t\tpublic static let \($1.name.lowerCamelCased()) = \($1.literal)\n\t\t"
+        $0 + "/// `\($1.hex)`\n\t\tstatic let \($1.name.lowerCamelCased()) = \($1.literal)\n\t\t"
     }
 
     return contents.replacingOccurrences(of: "{NAME}", with: name.upperCamelCased())

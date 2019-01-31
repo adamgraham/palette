@@ -2,11 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Name</key>
-	<string>Sample</string>
-	<key>Colors</key>
-	<dict>
-		<key>white</key>
+    <key>Name</key>
+    <string>Sample</string>
+    <key>Colors</key>
+    <dict>
+        <key>white</key>
 		<string>#ffffff</string>
 		<key>red</key>
 		<string>#ff0000</string>
@@ -22,6 +22,6 @@
 		<string>#ffff00</string>
 		<key>black</key>
 		<string>#000000</string>
-	</dict>
+    </dict>
 </dict>
 </plist>
