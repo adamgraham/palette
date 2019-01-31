@@ -51,6 +51,7 @@ guard colors.count > 0 else {
 enum OutputType: String {
 
     case clr = "--clr"
+    case colorset = "--colorset"
     case plist = "--plist"
     case swift = "--swift"
     case txt = "--txt"
@@ -71,7 +72,7 @@ do {
     let colorPalette = try composePalette(from: colors, type: outputType, name: outputName)
     print("[Working]: Writing colors to file")
     try colorPalette.write(to: outputURL)
-    print("[Success]: Color palette '\(outputName)\' created at \(outputURL)")
+    print("[Success]: Color palette '\(outputName)\' created at \(outputDirectory)/")
     exit(0)
 } catch let error {
     print("[Error]: \(error)")

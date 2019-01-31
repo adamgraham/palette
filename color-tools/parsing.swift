@@ -26,36 +26,15 @@ enum ParsingError: Error, CustomStringConvertible {
 
 func parseColors(at url: URL) throws -> [Color] {
     switch url.pathExtension {
-    case "txt":
-        return try parse(txt: url)
     case "plist":
         return try parse(plist: url)
     case "swift":
         return try parse(swift: url)
+    case "txt":
+        return try parse(txt: url)
     default:
         throw ParsingError.invalidExtension
     }
-}
-
-private func parse(txt url: URL) throws -> [Color] {
-    let contents = try fileContents(atPath: url)
-    let regex = try NSRegularExpression(pattern: "(.*)((?:#|0x)[0-9a-fA-F]*)")
-    let matches = regex.matches(in: contents, options: [], range: NSRange(location: 0, length: contents.count))
-    var colors: [Color] = []
-
-    for match in matches {
-        guard let hexCapture = Range(match.range(at: 2), in: contents) else { continue }
-        let nameCapture = Range(match.range(at: 1), in: contents) ?? hexCapture
-
-        let hex = String(contents[hexCapture])
-        var name = String(contents[nameCapture]).trimmingCharacters(in: .whitespacesAndNewlines)
-        if name.isEmpty { name = hex }
-
-        guard let color = Color(hex: hex, name: name) else { continue }
-        colors.append(color)
-    }
-
-    return colors
 }
 
 private func parse(plist url: URL) throws -> [Color] {
@@ -120,6 +99,27 @@ private func parse(swift url: URL) throws -> [Color] {
         }
 
         let color = Color(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha), name: String(contents[nameCapture]))
+        colors.append(color)
+    }
+
+    return colors
+}
+
+private func parse(txt url: URL) throws -> [Color] {
+    let contents = try fileContents(atPath: url)
+    let regex = try NSRegularExpression(pattern: "(.*)((?:#|0x)[0-9a-fA-F]*)")
+    let matches = regex.matches(in: contents, options: [], range: NSRange(location: 0, length: contents.count))
+    var colors: [Color] = []
+
+    for match in matches {
+        guard let hexCapture = Range(match.range(at: 2), in: contents) else { continue }
+        let nameCapture = Range(match.range(at: 1), in: contents) ?? hexCapture
+
+        let hex = String(contents[hexCapture])
+        var name = String(contents[nameCapture]).trimmingCharacters(in: .whitespacesAndNewlines)
+        if name.isEmpty { name = hex }
+
+        guard let color = Color(hex: hex, name: name) else { continue }
         colors.append(color)
     }
 
