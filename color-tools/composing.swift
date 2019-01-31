@@ -90,7 +90,7 @@ private func compose(plist colors: [Color], name: String) throws -> WritableFile
         """
 
     let colorContents = colors.reduce("") {
-        $0 + "<key>\($1.name)</key>\n\t\t<string>\($1.hex)</string>\n\t\t"
+        $0 + "<key>\($1.name)</key>\n        <string>\($1.hex)</string>\n        "
     }
 
     return contents.replacingOccurrences(of: "{NAME}", with: name)
@@ -113,7 +113,7 @@ private func compose(swift colors: [Color], name: String) throws -> WritableFile
         """
 
     let colorContents = colors.reduce("") {
-        $0 + "/// `\($1.hex)`\n\t\tstatic let \($1.name.lowerCamelCased()) = \($1.literal)\n\t\t"
+        $0 + "/// `\($1.hex)`\n        static let \($1.name.lowerCamelCased()) = \($1.literal)\n        "
     }
 
     return contents.replacingOccurrences(of: "{NAME}", with: name.upperCamelCased())
@@ -174,7 +174,6 @@ struct ColorsetContents: WritableFileContents {
             try color.contents.write(to: contentsURL, atomically: true, encoding: .utf8)
             print(contentsURL)
         }
-
     }
 
 }
