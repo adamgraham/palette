@@ -15,11 +15,33 @@ let args = CommandLine.arguments
 
 func printUsage() {
     let executableName = (CommandLine.arguments[0] as NSString).lastPathComponent
-    print("[Usage]: \(executableName) {input_file} {output_name} {output_dir}? --clr")
-    print("[Usage]: \(executableName) {input_file} {output_name} {output_dir}? --colorset")
-    print("[Usage]: \(executableName) {input_file} {output_name} {output_dir}? --plist")
-    print("[Usage]: \(executableName) {input_file} {output_name} {output_dir}? --swift")
-    print("[Usage]: \(executableName) {input_file} {output_name} {output_dir}? --txt")
+    let usage = """
+
+        [Usage]: \(executableName) {input_file} {output_name} {output_dir}? {output_type}
+
+            {input_file}
+              - A path to a file to parse colors from
+              - Supported file types: .plist, .swift, .txt
+              - The file extension must be included in the path
+
+            {output_name}
+              - The desired name of the color palette
+
+            {output_dir}?
+              - A path to a directory at which the color palette is outputted
+              - If not provided, the color palette is outputted at the current working directory
+
+            {output_type}
+              - The format of the outputted color palette
+              - Options: --clr, --colorset, --plist, --swift, --txt
+
+        """
+    print(usage)
+}
+
+if args.contains("-h") || args.contains("--help") {
+    printUsage()
+    exit(0)
 }
 
 guard args.count >= 4 else {
