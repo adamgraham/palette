@@ -1,8 +1,8 @@
-#ffffff White
-#ff0000 Red
-#00ff00 Green
-#0000ff Blue
-#00ffff Cyan
-#ff00ff Magenta
-#ffff00 Yellow
-#000000 Black
+white #ffffff
+red #ff0000
+green #00ff00
+blue #0000ff
+cyan #00ffff
+magenta #ff00ff
+yellow #ffff00
+black #000000
