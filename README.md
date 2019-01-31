@@ -1,10 +1,10 @@
 # swift-color-tools
 > Swift command line tools for creating color palettes.
 
-## Usage
+### Usage
 `./color-tools` `{input_file}` `{output_name}` `{output_dir}?` `{output_type}`
 
-### Required Arguments:
+#### Required Arguments:
 - `{input_file}`
   - A path to a file to parse colors from
   - Supported file types: `.plist` `.swift` `.txt`
@@ -16,12 +16,12 @@
   - Options: `--clr` `--colorset` `--plist` `--swift` `--txt`
   - *See below for more information*
 
-### Optional Arguments:
+#### Optional Arguments:
 - `{output_dir}`
   - A path to a directory at which the color palette is outputted
   - If not provided, the color palette is outputted at the current working directory
   
-## Formats
+### Formats
 
 🗺️ **Color Map** `.clr` `--clr` (Binary)
 ```
