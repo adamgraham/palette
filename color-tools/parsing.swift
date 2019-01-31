@@ -16,7 +16,7 @@ enum ParsingError: Error, CustomStringConvertible {
     var description: String {
         switch self {
         case .invalidExtension:
-            return "File path must include .txt, .plist, or .swift extension"
+            return "Input file path must include .txt, .plist, or .swift extension"
         case .readingContents(let url, let error):
             return "Could not read contents of \"\(url)\" - \(error)"
         }

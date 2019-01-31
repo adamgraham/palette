@@ -8,17 +8,16 @@
 
 import AppKit
 
-func composePalette(from colors: [Color], at url: URL?) throws -> WritableFileContents {
-    let name = url?.deletingPathExtension().lastPathComponent ?? "Unnamed"
-    switch url?.pathExtension {
-    case .some("txt"):
-        return try compose(txt: colors, name: name)
-    case .some("plist"):
-        return try compose(plist: colors, name: name)
-    case .some("swift"):
-        return try compose(swift: colors, name: name)
-    default:
+func composePalette(from colors: [Color], type: OutputType, name: String) throws -> WritableFileContents {
+    switch type {
+    case .clr:
         return try compose(clr: colors, name: name)
+    case .plist:
+        return try compose(plist: colors, name: name)
+    case .swift:
+        return try compose(swift: colors, name: name)
+    case .txt:
+        return try compose(txt: colors, name: name)
     }
 }
 
@@ -93,9 +92,8 @@ protocol WritableFileContents {
 extension String: WritableFileContents {
 
     func write(to url: URL?) throws {
-        try self.write(to: url ?? URL(fileURLWithPath: FileManager.default.currentDirectoryPath),
-                       atomically: true,
-                       encoding: .utf8)
+        let fileURL = url ?? URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        try self.write(to: fileURL, atomically: true, encoding: .utf8)
     }
 
 }
