@@ -21,7 +21,7 @@
   - A path to a directory at which the color palette is outputted
   - If not provided, the color palette is outputted at the current working directory
   
-### Formats
+## Formats
 
 🗺️ **Color Map** `.clr` `--clr` (Binary)
 ```
