@@ -72,21 +72,28 @@ guard colors.count > 0 else {
 
 enum OutputType: String {
 
-    case clr = "--clr"
-    case colorset = "--colorset"
-    case plist = "--plist"
-    case swift = "--swift"
-    case txt = "--txt"
+    case clr = "clr"
+    case colorset = "colorset"
+    case plist = "plist"
+    case swift = "swift"
+    case txt = "txt"
+
+    init?(type: String) {
+        self.init(rawValue: type.lowercased()
+            .replacingOccurrences(of: ".", with: "")
+            .replacingOccurrences(of: "--", with: ""))
+    }
 
     var fileExtension: String {
-        return self.rawValue.replacingOccurrences(of: "--", with: ".")
+        return ".\(self.rawValue)"
     }
 
 }
 
-let outputType = OutputType(rawValue: args.last!) ?? .clr
+let outputType = OutputType(rawValue: args.last!) ?? OutputType(type: args.last!) ?? .clr
 let outputName = args[2]
 let outputDirectory = args.count == 5 ? args[3] : FileManager.default.currentDirectoryPath
+print("TEST: \(FileManager.default.currentDirectoryPath)")
 let outputURL = URL(fileURLWithPath: "\(outputDirectory)/\(outputName)\(outputType.fileExtension)")
 
 do {
