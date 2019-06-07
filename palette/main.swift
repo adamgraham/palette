@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  color-tools
+//  palette
 //
 //  Created by Adam Graham on 1/9/19.
 //  Copyright © 2019 Adam Graham. All rights reserved.

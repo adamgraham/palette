@@ -1,8 +1,8 @@
-# swift-color-tools
-> Swift command line tools for creating color palettes.
+# palette
+> An iOS command line tool to parse files and generate color palettes.
 
 ### Usage
-`./color-tools` `{input_file}` `{output_name}` `{output_dir}?` `{output_type}`
+`./palette` `{input_file}` `{output_name}` `{output_dir}?` `{output_type}`
 
 #### Required Arguments:
 - `{input_file}`

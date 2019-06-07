@@ -41,7 +41,7 @@
 		9D7430A922039D640034E5F1 /* sample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sample.plist; sourceTree = "<group>"; };
 		9D78CE1C22AA0ADF00AD0624 /* sample-literal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "sample-literal.swift"; sourceTree = "<group>"; };
 		9DF27D6921F8DE6E009E10ED /* composing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = composing.swift; sourceTree = "<group>"; };
-		9DFEE7F221E65147009E67CF /* color-tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "color-tools"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DFEE7F221E65147009E67CF /* palette */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = palette; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DFEE7F521E65147009E67CF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9DFEE80021E65C27009E67CF /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
 		9DFEE80221E66515009E67CF /* parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parsing.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				9DFEE7FF21E6585D009E67CF /* samples */,
-				9DFEE7F421E65147009E67CF /* color-tools */,
+				9DFEE7F421E65147009E67CF /* palette */,
 				9DFEE7F321E65147009E67CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -150,12 +150,12 @@
 		9DFEE7F321E65147009E67CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9DFEE7F221E65147009E67CF /* color-tools */,
+				9DFEE7F221E65147009E67CF /* palette */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9DFEE7F421E65147009E67CF /* color-tools */ = {
+		9DFEE7F421E65147009E67CF /* palette */ = {
 			isa = PBXGroup;
 			children = (
 				9DFEE80021E65C27009E67CF /* color.swift */,
@@ -163,7 +163,7 @@
 				9DFEE80221E66515009E67CF /* parsing.swift */,
 				9DFEE7F521E65147009E67CF /* main.swift */,
 			);
-			path = "color-tools";
+			path = palette;
 			sourceTree = "<group>";
 		};
 		9DFEE7FF21E6585D009E67CF /* samples */ = {
@@ -182,9 +182,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9DFEE7F121E65147009E67CF /* color-tools */ = {
+		9DFEE7F121E65147009E67CF /* palette */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9DFEE7F921E65147009E67CF /* Build configuration list for PBXNativeTarget "color-tools" */;
+			buildConfigurationList = 9DFEE7F921E65147009E67CF /* Build configuration list for PBXNativeTarget "palette" */;
 			buildPhases = (
 				9DFEE7EE21E65147009E67CF /* Sources */,
 				9DFEE7EF21E65147009E67CF /* Frameworks */,
@@ -194,9 +194,9 @@
 			);
 			dependencies = (
 			);
-			name = "color-tools";
-			productName = "color-tools";
-			productReference = 9DFEE7F221E65147009E67CF /* color-tools */;
+			name = palette;
+			productName = "palette";
+			productReference = 9DFEE7F221E65147009E67CF /* palette */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -214,7 +214,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9DFEE7ED21E65147009E67CF /* Build configuration list for PBXProject "color-tools" */;
+			buildConfigurationList = 9DFEE7ED21E65147009E67CF /* Build configuration list for PBXProject "palette" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -226,7 +226,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9DFEE7F121E65147009E67CF /* color-tools */,
+				9DFEE7F121E65147009E67CF /* palette */,
 			);
 		};
 /* End PBXProject section */
@@ -384,7 +384,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9DFEE7ED21E65147009E67CF /* Build configuration list for PBXProject "color-tools" */ = {
+		9DFEE7ED21E65147009E67CF /* Build configuration list for PBXProject "palette" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9DFEE7F721E65147009E67CF /* Debug */,
@@ -393,7 +393,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9DFEE7F921E65147009E67CF /* Build configuration list for PBXNativeTarget "color-tools" */ = {
+		9DFEE7F921E65147009E67CF /* Build configuration list for PBXNativeTarget "palette" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9DFEE7FA21E65147009E67CF /* Debug */,

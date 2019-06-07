@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:color-tools.xcodeproj">
+      location = "self:/Users/adamgraham/Developer/Adam Graham/swift-color-tools/palette.xcodeproj">
    </FileRef>
 </Workspace>

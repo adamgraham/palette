@@ -1,6 +1,6 @@
 //
 //  composing.swift
-//  color-tools
+//  palette
 //
 //  Created by Adam Graham on 1/23/19.
 //  Copyright © 2019 Adam Graham. All rights reserved.
