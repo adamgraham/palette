@@ -39,6 +39,7 @@
 		9D7430A722039D640034E5F1 /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
 		9D7430A822039D640034E5F1 /* sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.txt; sourceTree = "<group>"; };
 		9D7430A922039D640034E5F1 /* sample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sample.plist; sourceTree = "<group>"; };
+		9D78CE1C22AA0ADF00AD0624 /* sample-literal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "sample-literal.swift"; sourceTree = "<group>"; };
 		9DF27D6921F8DE6E009E10ED /* composing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = composing.swift; sourceTree = "<group>"; };
 		9DFEE7F221E65147009E67CF /* color-tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "color-tools"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DFEE7F521E65147009E67CF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -172,6 +173,7 @@
 				9D74309522039D640034E5F1 /* sample.clr */,
 				9D7430A922039D640034E5F1 /* sample.plist */,
 				9D74309422039D640034E5F1 /* sample.swift */,
+				9D78CE1C22AA0ADF00AD0624 /* sample-literal.swift */,
 				9D7430A822039D640034E5F1 /* sample.txt */,
 			);
 			path = samples;

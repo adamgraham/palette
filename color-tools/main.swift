@@ -33,7 +33,7 @@ func printUsage() {
 
             {output_type}
               - The format of the outputted color palette
-              - Options: --clr, --colorset, --plist, --swift, --txt
+              - Options: --clr, --colorset, --plist, --swift, --swift-literal --txt
 
         """
     print(usage)
@@ -76,6 +76,7 @@ enum OutputType: String {
     case colorset = "colorset"
     case plist = "plist"
     case swift = "swift"
+    case swiftLiteral = "swift-literal"
     case txt = "txt"
 
     init?(type: String) {
@@ -85,7 +86,12 @@ enum OutputType: String {
     }
 
     var fileExtension: String {
-        return ".\(self.rawValue)"
+        switch self {
+        case .swiftLiteral:
+            return ".swift"
+        default:
+            return ".\(self.rawValue)"
+        }
     }
 
 }

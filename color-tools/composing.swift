@@ -18,6 +18,8 @@ func composePalette(from colors: [Color], type: OutputType, name: String) throws
         return try compose(plist: colors, name: name)
     case .swift:
         return try compose(swift: colors, name: name)
+    case .swiftLiteral:
+        return try compose(swiftLiteral: colors, name: name)
     case .txt:
         return try compose(txt: colors, name: name)
     }
@@ -113,11 +115,36 @@ private func compose(swift colors: [Color], name: String) throws -> WritableFile
         """
 
     let colorContents = colors.reduce("") {
-        $0 + "/// `\($1.hex)`\n        static let \($1.name.lowerCamelCased()) = \($1.literal)\n        "
+        let color = $1.nsColor
+        let rgba = (r: color.redComponent, g: color.greenComponent, b: color.blueComponent, a: color.alphaComponent)
+        return $0 + "/// `\($1.hex)`\n        static let \($1.name.lowerCamelCased()) = UIColor(red: \(rgba.r), green: \(rgba.g), blue: \(rgba.b), alpha: \(rgba.a))\n        "
     }
 
     return contents.replacingOccurrences(of: "{NAME}", with: name.upperCamelCased())
                    .replacingOccurrences(of: "{COLORS}", with: colorContents)
+}
+
+private func compose(swiftLiteral colors: [Color], name: String) throws -> WritableFileContents {
+    let contents = """
+        extension UIColor {
+
+            struct {NAME} {
+
+                {COLORS}
+                private init() {}
+
+            }
+
+        }
+
+        """
+
+    let colorContents = colors.reduce("") {
+        $0 + "/// `\($1.hex)`\n        static let \($1.name.lowerCamelCased()) = \($1.literal)\n        "
+    }
+
+    return contents.replacingOccurrences(of: "{NAME}", with: name.upperCamelCased())
+        .replacingOccurrences(of: "{COLORS}", with: colorContents)
 }
 
 private func compose(txt colors: [Color], name: String) throws -> WritableFileContents {
