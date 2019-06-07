@@ -99,7 +99,6 @@ enum OutputType: String {
 let outputType = OutputType(rawValue: args.last!) ?? OutputType(type: args.last!) ?? .clr
 let outputName = args[2]
 let outputDirectory = args.count == 5 ? args[3] : FileManager.default.currentDirectoryPath
-print("TEST: \(FileManager.default.currentDirectoryPath)")
 let outputURL = URL(fileURLWithPath: "\(outputDirectory)/\(outputName)\(outputType.fileExtension)")
 
 do {
