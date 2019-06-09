@@ -1,4 +1,4 @@
-# palette
+# Palette
 > An iOS command line tool to parse files and generate color palettes.
 
 ### Usage
