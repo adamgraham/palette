@@ -1,7 +1,7 @@
 # Palette
 > An iOS command line tool to parse files and generate color palettes.
 
-### Usage
+## Usage
 `./palette` `{input_file}` `{output_name}` `{output_dir}?` `{output_type}`
 
 #### Required Arguments:
